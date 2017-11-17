@@ -1,0 +1,4 @@
+com\sbs\springboot\bean\Course.class
+com\sbs\springboot\controller\CourseController.class
+com\sbs\springboot\SpringBootConsoleApplication.class
+com\sbs\springboot\service\CourseAPIService.class
