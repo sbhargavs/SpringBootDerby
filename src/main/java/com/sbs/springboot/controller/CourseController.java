@@ -18,7 +18,7 @@ public class CourseController {
 	@Autowired
 	public CourseAPIService courseAPIService;
 
-	@RequestMapping("/courses")
+	@RequestMapping("/getCourses")
 	public List<Course> getAllCourses() {
 
 		try {
@@ -39,8 +39,9 @@ public class CourseController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/courses")
+	@RequestMapping(method = RequestMethod.PUT, value = "/putCourses")
 	public void updateCourse(@RequestBody Course course) {
+		System.out.println("Course Object ************************ "+course);
 		courseAPIService.updateCourse(course);
 	}
 
@@ -50,7 +51,7 @@ public class CourseController {
 		courseAPIService.deleteCourse(course);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/courses")
+	@RequestMapping(method = RequestMethod.POST, value = "/postCourses")
 	public void addCourse(@RequestBody Course course) {
 		courseAPIService.addCourse(course);
 	}

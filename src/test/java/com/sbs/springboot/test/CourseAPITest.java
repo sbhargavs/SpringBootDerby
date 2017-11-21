@@ -1,5 +1,7 @@
 package com.sbs.springboot.test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,12 @@ public class CourseAPITest {
 	@Test
 	public void testCourseAPI() throws Exception {
 		Course course = new Course();
-		course.setId("2");
+		//course.setId("2");
 		course.setName("Course Name");
 		course.setDetails("Course Details");
 		courseRepo.save(course);
-
-		assert (courseRepo.findOne("2").getName().equalsIgnoreCase("Course Name"));
+		System.out.println(courseRepo.findOne("2").getName());
+		assertThat(courseRepo.findOne("2").getName().equals("123"));
 
 	}
 
@@ -39,7 +41,8 @@ public class CourseAPITest {
 	}
 
 	/**
-	 * @param courseRepo the courseRepo to set
+	 * @param courseRepo
+	 *            the courseRepo to set
 	 */
 	public void setCourseRepo(CourseRespository courseRepo) {
 		this.courseRepo = courseRepo;

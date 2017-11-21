@@ -2,38 +2,55 @@ package com.sbs.springboot.bean;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-@Entity
-public class Course  implements Serializable{
+@Entity(name = "Course")
+@Table(name ="course")
+public class Course implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4418056278349817111L;
-	
+
 	@Id
-	private String Id;
-	private String name;
-	private String details;
+	@GeneratedValue
+	Long Id;
+	
+	@Column(name ="name")
+	 String name;
+	@Column(name ="details")
+	String details;
+
+	
+	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL, 
+            fetch = FetchType.EAGER, optional = false)
+	private Chapter chapter;
 
 	public Course() {
 		super();
 	}
 
-	public Course(String id, String name, String details) {
+	public Course(Long id, String name, String details,Chapter chapter) {
 		super();
 		Id = id;
 		this.name = name;
 		this.details = details;
+		this.chapter= chapter;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return Id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 
@@ -53,7 +70,9 @@ public class Course  implements Serializable{
 		this.details = details;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -64,7 +83,9 @@ public class Course  implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -83,7 +104,30 @@ public class Course  implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
+	/**
+	 * @return the chapterList
+	 */
+	public Chapter getChapter() {
+		return chapter;
+	}
+
+	/**
+	 * @param chapterList
+	 *            the chapterList to set
+	 */
+	public void setChapterList(Chapter chapter) {
+		this.chapter = chapter;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Course [Id=" + Id + ", name=" + name + ", details=" + details + ", chapter=" + chapter + "]";
+	}
+
+	
+	
 }
