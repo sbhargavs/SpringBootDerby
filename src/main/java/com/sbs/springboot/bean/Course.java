@@ -1,14 +1,16 @@
 package com.sbs.springboot.bean;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "Course")
@@ -22,28 +24,28 @@ public class Course implements Serializable {
 
 	@Id
 	@GeneratedValue
-	Long Id;
+	private Long Id;
 	
 	@Column(name ="name")
-	 String name;
+	private String name;
 	@Column(name ="details")
-	String details;
+	private String details;
 
 	
-	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL, 
-            fetch = FetchType.EAGER, optional = false)
-	private Chapter chapter;
-
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name ="course_id")
+	private Set<Chapter> chapters =new HashSet<Chapter>();
+	
 	public Course() {
 		super();
 	}
 
-	public Course(Long id, String name, String details,Chapter chapter) {
+	public Course(Long id, String name, String details,Set<Chapter> chapters) {
 		super();
 		Id = id;
 		this.name = name;
 		this.details = details;
-		this.chapter= chapter;
+		this.chapters= chapters;
 	}
 
 	public Long getId() {
@@ -108,16 +110,16 @@ public class Course implements Serializable {
 	/**
 	 * @return the chapterList
 	 */
-	public Chapter getChapter() {
-		return chapter;
+	public Set<Chapter> getChapters() {
+		return chapters;
 	}
 
 	/**
 	 * @param chapterList
 	 *            the chapterList to set
 	 */
-	public void setChapterList(Chapter chapter) {
-		this.chapter = chapter;
+	public void setChapterList(Set<Chapter> chapters) {
+		this.chapters = chapters;
 	}
 
 	/* (non-Javadoc)
@@ -125,8 +127,9 @@ public class Course implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Course [Id=" + Id + ", name=" + name + ", details=" + details + ", chapter=" + chapter + "]";
+		return "Course [Id=" + Id + ", name=" + name + ", details=" + details + ", chapters=" + chapters + "]";
 	}
+
 
 	
 	

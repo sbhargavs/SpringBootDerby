@@ -1,4 +1,4 @@
-package com.sbs.springboot.controller;
+package com.sbs.springboot.rest.controller;
 
 import java.util.List;
 
@@ -22,11 +22,14 @@ public class CourseController {
 	public List<Course> getAllCourses() {
 
 		try {
+			/*System.out.println("Course Size--> "+courseAPIService.getAllCourses().size());*/
 			return courseAPIService.getAllCourses();
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
 		}
+
 	}
 
 	@RequestMapping("/courses/{id}")
@@ -41,16 +44,16 @@ public class CourseController {
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/putCourses")
 	public void updateCourse(@RequestBody Course course) {
-		System.out.println("Course Object ************************ "+course);
+		System.out.println("Course Object ************************ " + course);
 		courseAPIService.updateCourse(course);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/courses/{id}")
 	public void deleteCourse(@RequestBody Course course) {
-		
+
 		courseAPIService.deleteCourse(course);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/postCourses")
 	public void addCourse(@RequestBody Course course) {
 		courseAPIService.addCourse(course);

@@ -15,13 +15,22 @@ public class CourseAPIService {
 	@Autowired
 	private CourseRespository courseRepo;
 
-	/*private List<Course> courseList = new ArrayList<Course>(Arrays.asList(
-			new Course("1", "java", "Java Standard Edition"), new Course("2", "j2ee", "Java Enterprice Edition"),
-			new Course("3", "j2me", "Java Mobile Edition")));*/
-
+	/*
+	 * private List<Course> courseList = new ArrayList<Course>(Arrays.asList(
+	 * new Course("1", "java", "Java Standard Edition"), new Course("2", "j2ee",
+	 * "Java Enterprice Edition"), new Course("3", "j2me", "Java Mobile Edition"
+	 * )));
+	 */
 	public List<Course> getAllCourses() throws Exception {
 		List<Course> courseList = new ArrayList<Course>();
+		/*
+		 * Course course = new Course(); course.setId(1L); course.setName(
+		 * "React JS"); course.setDetails("React JS responsive Design");
+		 * courseList.add(course);
+		 */
+
 		courseRepo.findAll().forEach(courseList::add);
+
 		return courseList;
 
 	}
