@@ -18,7 +18,7 @@ public class CourseController {
 	@Autowired
 	public CourseAPIService courseAPIService;
 
-	@RequestMapping("/getCourses")
+	@RequestMapping("/course/getCourses")
 	public List<Course> getAllCourses() {
 
 		try {
@@ -32,7 +32,7 @@ public class CourseController {
 
 	}
 
-	@RequestMapping("/courses/{id}")
+	@RequestMapping("/course/{id}")
 	public Course getCourse(@PathVariable String id) {
 		try {
 			return courseAPIService.getCourse(id);
@@ -42,19 +42,19 @@ public class CourseController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/putCourses")
+	@RequestMapping(method = RequestMethod.PUT, value = "/course/putCourses")
 	public void updateCourse(@RequestBody Course course) {
 		System.out.println("Course Object ************************ " + course);
 		courseAPIService.updateCourse(course);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/courses/{id}")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/course/{id}")
 	public void deleteCourse(@RequestBody Course course) {
 
 		courseAPIService.deleteCourse(course);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/postCourses")
+	@RequestMapping(method = RequestMethod.POST, value = "/course/postCourses")
 	public void addCourse(@RequestBody Course course) {
 		courseAPIService.addCourse(course);
 	}

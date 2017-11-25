@@ -32,11 +32,10 @@ public class CourseAPIWebController {
 
 	private List<Course> extracted(RestTemplate restTemplate) {
 
-		ParameterizedTypeReference<List<Course>> responseType = new ParameterizedTypeReference<List<Course>>() {
-		};
+		ParameterizedTypeReference<List<Course>> responseType = new ParameterizedTypeReference<List<Course>>() {};
 		ResponseEntity<List<Course>> result = restTemplate.exchange(
 				new StringBuilder("http://localhost:8080/getCourses").toString(), HttpMethod.GET, null, responseType);
-		System.out.println("result.getBody()" +result.getBody());
+		/*System.out.println("result.getBody()" +result.getBody());*/
 		return result.getBody();
 	}
 
